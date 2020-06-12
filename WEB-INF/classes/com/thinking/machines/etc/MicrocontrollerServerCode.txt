@@ -1,0 +1,45 @@
+#include<ESP8266WiFi.h>
+#include "DHT.h"        // including the library of DHT11 temperature and humidity sensor
+#define DHTTYPE DHT11   // DHT 11
+#define dht_dpin D6
+const char *network="GuptaShivam";
+const char *key="0123456789";
+float gasValue=23.23;
+float fireValue=23.24;
+char responseBuffer[101];
+DHT dht(dht_dpin, DHTTYPE);
+WiFiServer server(7007);
+WiFiClient client;
+void setup(void)
+{ 
+  delay(1500);
+  Serial.begin(9600);
+  WiFi.begin(network, key);
+  dht.begin();
+  
+  Serial.print("Establishing connection");
+  while(WiFi.status()!=WL_CONNECTED){
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.print("IP Address alloted is : ");
+  Serial.println(WiFi.localIP());
+  Serial.println("Server is ready and listening");
+  server.begin();
+}
+void loop() {
+   client=server.available();
+   if(client && client.connected()){
+    Serial.println("A client connected");
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+    Serial.println(t);
+    Serial.print(h);
+    sprintf(responseBuffer, "%.2f%.2f%.2f%.2f\n\0", h,t,gasValue, fireValue);         
+    client.write(responseBuffer,sizeof(responseBuffer));
+    Serial.print("Response sent : ");
+    Serial.printf("%s", responseBuffer);
+    delay(2000);
+ }
+}

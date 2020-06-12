@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Security &mdash; Website Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:300,400,700,800|Open+Sans:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+   <script>
+
+     var responseFromServer;
+
+     function configurePage(){
+       var url="/ios-srs/response";
+       var req=new XMLHttpRequest();
+       req.onreadystatechange=function(){
+         if(this.readyState==4 && this.status==200){
+           responseFromServer=JSON.parse(req.responseText);
+           if(responseFromServer.success==true){
+             getTime();
+             getHumidity();
+             setTimeout(configurePage, 2000);
+           }
+         }        
+       }
+       req.open("GET", url,true);
+       req.send(); 
+     }
+
+     function getTime(){
+      var tempchk=document.getElementById("tempCheck");
+      if(tempchk.checked==false){
+        var spaces="&nbsp;";
+        for(var i=0;i<61;++i) spaces+="&nbsp;";
+        document.getElementById("temp22").innerHTML="-"+spaces;
+        setTimeout(getTime, 1000);
+        return;
+       }
+       else{
+        document.getElementById("temp22").innerHTML="The temperature of the room is: "+responseFromServer.response.temperature;
+       }
+      }
+
+
+     function getHumidity(){
+      var humchk=document.getElementById("humidityCheck");
+      if(humchk.checked==false){
+        var spaces="&nbsp;";
+        for(var i=0;i<61;++i) spaces+="&nbsp;";
+        document.getElementById("humid22").innerHTML="-"+spaces;
+        setTimeout(getHumidity, 1000);
+        return;
+       }
+       else{
+        document.getElementById("humid22").innerHTML="The humidity of the room is: "+responseFromServer.response.humidity;
+       }
+      }
+
+
+
+     function connect(){
+       var url="/ios-srs/connect";
+       var req=new XMLHttpRequest();
+       req.onreadystatechange=function(){
+         if(this.readyState==4 && this.status==200){
+           responseFromServer=JSON.parse(req.responseText);
+           if(responseFromServer.success==true){
+             alert("con");
+             configurePage();
+           }
+         }      
+       }
+       req.open("GET", url,true);
+       req.send();        
+      }
+
+     window.addEventListener("load", connect);
+
+   </script>
+
+  </head>
+  <body class="bg-light">
+
+  <style>
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+  </style>
+
+    <body data-spy="scroll" data-target="#ftco-navbar-spy" data-offset="0">
+
+    <div class="site-wrap">
+      
+      <nav class="site-menu" id="ftco-navbar-spy">
+        <div class="site-menu-inner" id="ftco-navbar">
+          <ul class="list-unstyled">
+            <li><a href="#section-home">Home</a></li>
+            <li><a href="#section-inspect">Inspect</a></li>
+            <li><a href="#section-about">About Project</a></li>
+            <li><a href="#section-services">Services</a></li>
+            <li><a href="#section-contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <header class="site-header">
+        <div class="row align-items-center">
+          <div class="col-5 col-md-3">
+             
+          </div>
+          <div class="col-2 col-md-6 text-center site-logo-wrap">
+            <a href="index.html" class="site-logo">S</a>
+          </div>
+          <div class="col-5 col-md-3 text-right menu-burger-wrap">
+            <a href="#" class="site-nav-toggle js-site-nav-toggle"><i></i></a>
+
+          </div>
+        </div>
+       
+      </header> <!-- site-header -->
+      
+      <div class="main-wrap " id="section-home">
+
+        <div class="cover_1 overlay bg-light">
+          <div class="img_bg" style="background-image: url(images/slider-1.jpg);" data-stellar-background-ratio="0.5">
+            <div class="container">
+              <div class="row align-items-center justify-content-center text-center">
+                <div class="col-md-10" data-aos="fade-up">
+                  <h2 class="heading mb-5">Security Reinforcement System</h2>
+                  <p><a href="#developers" class="smoothscroll btn btn-outline-white px-5 py-3">About Developers</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- .cover_1 -->
+
+        <div class="section"  data-aos="fade-up" id="section-inspect">
+          <div class="container">
+            <div class="row section-heading justify-content-center mb-5">
+              <div class="col-md-8 text-center">
+                <h2 class="heading mb-3" >Inspect</h2>  
+              </div>
+            </div>
+            <div class="row">
+
+             <div class="ftco-46">
+                <div class="d-flex flex-column flex-lg-row">
+                  <div class="ftco-46-text ftco-46-arrow-left">
+                    <h6 class="ftco-46-subheading">Temperature</h6>
+                    <p id="temp22"></p>
+                  </div>
+                    <div class="ftco-46-text ftco-46-arrow-left">
+                    <h6 class="ftco-46-subheading">Status</h6>
+                    <label class="switch">
+                     <input id="tempCheck" type="checkbox">
+                     <span class="slider round"></span>
+                    </label>
+                  </div>
+
+
+
+
+
+                </div>
+
+
+               <div  class="d-flex flex-column flex-lg-row">
+
+                   <div class="ftco-46-text ftco-46-arrow-left">
+                    <h4 class="ftco-46-subheading">Humidity</h4>
+                    <p id="humid22"></p>
+                  </div>
+
+                    <div class="ftco-46-text ftco-46-arrow-left">
+                    <h6 class="ftco-46-subheading">Status</h6>
+                    <label class="switch">
+                     <input id="humidityCheck" type="checkbox">
+                     <span class="slider round"></span>
+                    </label>
+                   </div>
+ 
+
+                </div>
+
+
+                <div class="d-flex flex-column flex-lg-row">
+                  <div class="ftco-46-text ftco-46-arrow-left">
+                    <h4 class="ftco-46-subheading">Fire</h4>
+                    <p>All seems fine!</p>
+                  </div>
+
+                   <div class="ftco-46-text ftco-46-arrow-left">
+                    <h6 class="ftco-46-subheading">Status</h6>
+                    <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                    </label>
+
+                  </div>
+
+                </div>
+
+
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- .section -->
+
+             
+
+        <div class="section pb-3 bg-white" id="section-about" data-aos="fade-up">
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-12 col-lg-8 section-heading">
+                <h2 class="heading mb-5">Our Project</h2>
+                <p>The Security Reinforecment Project of notifies not only the about the security but also tries to cop up as per the requirement.</p>
+                <p>The model is in the budget and is so very good.</p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- .section -->
+        
+
+        <div class="section bg-white pt-2 pb-2 text-center" data-aos="fade">
+          <p><img src="images/bg_hero.png" alt="Image" class="img-fluid"></p>
+        </div> <!-- .section -->
+
+        <div class="section bg-white" data-aos="fade-up" id="developers">
+          <div class="container">
+            <div class="row mb-5">
+              <div class="col-md-12 section-heading text-center">
+                <h2 class="heading mb-5" >Meet The Developers</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-md-5 text-center mb-5">
+                <div class="ftco-38">
+                  <div class="ftco-38-img">
+                    <div class="ftco-38-header">
+                      <img src="images/chef_1.jpg" alt="Image">
+                      <h3 class="ftco-38-heading">Shivam Gupta</h3>
+                      <p class="ftco-38-subheading">Developer</p>
+                    </div>
+                    <div class="ftco-38-body">
+                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                      <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. It is a paradisematic country.</p>
+                      <p>
+                        <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-4 pr-md-5 text-center mb-5">
+                <div class="ftco-38">
+                  <div class="ftco-38-img">
+                    <div class="ftco-38-header">
+                      <img src="images/chef_1.jpg" alt="Image">
+                      <h3 class="ftco-38-heading">Vishal Gupta</h3>
+                      <p class="ftco-38-subheading">Developer</p>
+                    </div>
+                    <div class="ftco-38-body">
+                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                      <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. It is a paradisematic country.</p>
+                      <p>
+                        <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+              <div class="col-md-4 pl-md-5 text-center mb-5">
+                <div class="ftco-38">
+                  <div class="ftco-38-img">
+                    <div class="ftco-38-header">
+                      <img src="images/chef_2.jpg" alt="Image">
+                      <h3 class="ftco-38-heading">Harshul Shrivastava</h3>
+                      <p class="ftco-38-subheading">Developer</p>
+                    </div>
+                    <div class="ftco-38-body">
+                      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                      <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. It is a paradisematic country.</p>
+                      <p>
+                        <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                        <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-md-4"></div> -->
+            </div>
+          </div>
+        </div> <!-- .section -->
+
+
+
+        <div class="section bg-white services-section" data-aos="fade-up" id="section-services">
+          <div class="container">
+            <div class="row section-heading justify-content-center mb-5">
+              <div class="col-md-8 text-center">
+                <h2 class="heading mb-3">Services</h2>  
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-m mb-5d-6 col-lg-4" data-aos="fade-up">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>24*7 Survillence</h3>
+                    <p>We let the user to have surivellence of 24*7. The user can get the data whenever he/she wants without any delay.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>Temperature Detection</h3>
+                    <p>The facility of temperature detection has also been provided as can be turned off as per user wants.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="300">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>Gas Detection</h3>
+                    <p>Lekage of the gas can be determined by the system, as system is capable to take necessory actions.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="500">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>Fire Dectection</h3>
+                    <p>The system is able to detect the fire and take the immediate action when required</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="300">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>Camera</h3>
+                    <p>High quality camera to let the user have live broadcast of the field.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="500">
+                <div class="media feature-icon d-block text-center">
+                  <div class="media-body">
+                    <h3>Dynamic Security</h3>
+                    <p>The availability of the user of enable and disable any device he/she wants.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- .section -->
+
+
+         <div class="section bg-white"  data-aos="fade-up">
+          <div class="container">
+            <div class="row section-heading justify-content-center mb-5">
+              <div class="col-md-8 text-center">
+                <h2 class="heading mb-3">Customer Reviews</h2>
+              </div>
+            </div>
+            <div class="row justify-content-center text-center" data-aos="fade-up">
+              <div class="col-md-8">
+                <div class="owl-carousel home-slider-loop-false">
+
+                
+                  <div class="item">
+                    <blockquote class="testimonial">
+                      <p>&ldquo;Hello there, I'm the lead of this security reinforcement System.&rdquo;</p>
+                      <div class="author">
+                        <img src="images/person_1.jpg" alt="Image placeholder" class="mb-3">
+                        <h4>Shivam Gupta</h4>
+                        <p>Founder</p>
+                      </div>
+                    </blockquote>
+                  </div>
+                  <div class="item">
+                    <blockquote class="testimonial">
+                      <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+                      <div class="author">
+                        <img src="images/person_2.jpg" alt="Image placeholder" class="mb-3">
+                        <h4>Vishal Gupta</h4>
+                        <p>Founder</p>
+                      </div>
+                    </blockquote>
+                  </div>
+                  <div class="item">
+                    <blockquote class="testimonial">
+                      <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+                      <div class="author">
+                        <img src="images/person_3.jpg" alt="Image placeholder" class="mb-3">
+                        <h4>Harshul Shrivastava</h4>
+                        <p>Founder</p>
+                      </div>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div> <!-- .section -->
+
+        <div class="section" data-aos="fade-up" id="section-contact">
+          <div class="container">
+            <div class="row section-heading justify-content-center mb-5">
+              <div class="col-md-8 text-center">
+                <h2 class="heading mb-3">Get in Touch</h2>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-10 p-5 form-wrap">
+                <form action="#">
+                  <div class="row mb-4">
+                    <div class="form-group col-md-4">
+                      <label for="name" class="label">Name</label>
+                      <div class="form-field-icon-wrap">
+                        <span class="icon ion-android-person"></span>
+                        <input type="text" class="form-control" id="name">
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="email" class="label">Email</label>
+                      <div class="form-field-icon-wrap">
+                        <span class="icon ion-email"></span>
+                        <input type="email" class="form-control" id="email">
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="phone" class="label">Phone</label>
+                      <div class="form-field-icon-wrap">
+                        <span class="icon ion-android-call"></span>
+                        <input type="text" class="form-control" id="phone">
+                      </div>
+                    </div>
+
+                   <div class="form-group col-md-12">
+                      <label for="message" class="label">Message</label>
+                     <textarea name="message" id="message" cols="30" rows="10" class="form-control"></textarea>
+                   </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-4">
+                      <input type="submit" class="btn btn-primary btn-outline-primary btn-block" value="Send Message">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div> <!-- .section -->
+
+        <div class="map-wrap" id="map"  data-aos="fade"></div>
+
+
+        <footer class="ftco-footer">
+          <div class="container">
+            
+            <div class="row">
+            <div class="col-md-4 mb-5">
+              <div class="footer-widget">
+                <h3 class="mb-4">About Guide</h3>
+                <p>This project is made unde the guidance of Prof. Purna Kumar Sir. Had he not helped us we would not have made this project. </p>
+                
+                <p><a href="#" class="btn btn-primary btn-outline-primary">Read More</a></p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <div class="footer-widget">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="footer-widget">
+                <h3 class="mb-4">Follow Along</h3>
+                <ul class="list-unstyled social">
+                  <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                  <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                  <li><a href="#"><span class="fa fa-instagram"></span></a></li>
+                </ul>
+              </div>
+              </div>
+
+            </div>
+
+            <div class="row pt-5">
+              <div class="col-md-12 text-center">
+                <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <a href="https://colorlib.com" target="_blank" ></a>
+            </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      
+    </div>
+
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff7a5c"/></svg></div>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+
+    <script src="js/jquery.easing.1.3.js"></script>    
+
+    <script src="js/aos.js"></script>
+    
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
